@@ -7,12 +7,23 @@ const authRoutes = require("./routes/authRoutes");
 const productRoutes = require("./routes/productRoutes");
 const app = express();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "https://stockpilot-frontend-7bvv.onrender.com",
+    ],
+    credentials: true,
+  })
+);
 app.use(express.json());
 
 // Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
+//cors config
+
+
 // Health Check
 app.get("/", (req, res) => {
   res.json({
